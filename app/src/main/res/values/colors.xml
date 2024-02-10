@@ -14,5 +14,16 @@
     <color name="darkRed">#510404</color>
     <color name="olive">#559906</color>
     <color name="darkGreen">#173F06</color>
+    <color name="grey">#242B2E</color>
+    <color name="banana">#CCCC61</color>
+
+
+    <color name="Note1">#659399</color>
+    <color name="Note2">#F1BD71</color>
+    <color name="Note3">#905763</color>
+    <color name="Note4">#6A9E6C</color>
+    <color name="Note5">#78629E</color>
+    <color name="Note6">#3F51B5</color>
+
 
 </resources>

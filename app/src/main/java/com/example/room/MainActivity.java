@@ -19,24 +19,13 @@ import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private DrawerLayout drawerLayout;
-    private NavigationView navigationView;
-    private VideoView videoView;
-    Button play ;
     MediaController media;
     VideoView video;
     VideoView dashboardVideo;
 
-
-    VideoView Category1Video;
-    VideoView Category2Video;
-    VideoView Category3Video;
-    VideoView Category4Video;
-    VideoView Category5Video;
-    VideoView Category6Video;
-
-
     LinearLayout dashboardLayout;
+
+    boolean dashboardVideoPlaying = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,9 +56,6 @@ public class MainActivity extends AppCompatActivity {
 
         dashboardLayout = findViewById(R.id.linearLayout);
 
-
-
-
         dashboardVideo = findViewById(R.id.DashboardVideo);
         media = new MediaController(this);
         String dashboardVideoPath = "android.resource://" + getPackageName() + "/" + R.raw.dash;
@@ -82,16 +68,22 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPrepared(MediaPlayer mp) {
                 mp.setLooping(true); // Set looping true to loop the video
+                if (!dashboardVideoPlaying) {
+                    dashboardVideo.start(); // Start the video playback if it's not already playing
+                    dashboardVideoPlaying = true;
+                }
             }
         });
 
-        dashboardVideo.setOnClickListener(view -> showPopupMenu(view));
-
-
-
+        dashboardVideo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, dashboardVideo.class);
+                startActivity(intent);
+            }
+        });
 
         // User Clicks on the Cards :
-
         LinearLayout category1CardView = findViewById(R.id.Category1);
         category1CardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,45 +93,26 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
-
-
-
-
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (dashboardVideo.isPlaying()) {
+            dashboardVideo.pause(); // Pause the dashboard video when the activity is paused
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!dashboardVideo.isPlaying() && dashboardVideoPlaying) {
+            dashboardVideo.start(); // Resume the dashboard video when the activity is resumed
+        }
+    }
+
     private void showDashboard() {
         dashboardLayout.setVisibility(View.VISIBLE);
         dashboardVideo.setVisibility(View.VISIBLE);
     }
-
-
-
-    void showPopupMenu(View view) {
-        PopupMenu popupMenu = new PopupMenu(this, view);
-        popupMenu.getMenuInflater().inflate(R.menu.dropdown_menu, popupMenu.getMenu());
-
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                if (item.getItemId() == R.id.action_music) {
-                    // Handle music toggle
-                    return true;
-                } else if (item.getItemId() == R.id.action_dark_mode) {
-                    // Handle dark mode toggle
-                    return true;
-                } else if (item.getItemId() == R.id.nav_about) {
-                    // Handle help action
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-        });
-
-        popupMenu.show();
-    }
-
-
 }
-

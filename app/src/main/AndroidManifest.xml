@@ -13,12 +13,19 @@
         android:theme="@style/Theme.Room"
         tools:targetApi="31">
         <activity
+            android:name=".NotesTaker"
+            android:theme="@style/Base.Theme.Room"
+            android:exported="false" />
+        <activity
+            android:name=".dashboardVideo"
+            android:exported="false" />
+        <activity
             android:name=".Notes"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
