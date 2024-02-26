@@ -4,6 +4,146 @@
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
-
     <style name="Theme.Room" parent="Base.Theme.Room" />
+
+
+    <style name="black">
+        <item name="android:color">@color/black</item>
+    </style>
+
+    <style name="white">
+        <item name="android:color">@color/white</item>
+    </style>
+
+    <style name="background1_1">
+        <item name="android:color">@color/background1.1</item>
+    </style>
+
+    <style name="background1_2">
+        <item name="android:color">@color/background1.2</item>
+    </style>
+
+    <style name="background2_1">
+        <item name="android:color">@color/background2.1</item>
+    </style>
+
+    <style name="background2_2">
+        <item name="android:color">@color/background2.2</item>
+    </style>
+
+    <style name="orange">
+        <item name="android:color">@color/orange</item>
+    </style>
+
+    <style name="yellow">
+        <item name="android:color">@color/yellow</item>
+    </style>
+
+    <style name="green">
+        <item name="android:color">@color/green</item>
+    </style>
+
+    <style name="yellow2">
+        <item name="android:color">@color/yellow2</item>
+    </style>
+
+    <style name="lightBlue">
+        <item name="android:color">@color/lightBlue</item>
+    </style>
+
+    <style name="darkRed">
+        <item name="android:color">@color/darkRed</item>
+    </style>
+
+    <style name="olive">
+        <item name="android:color">@color/olive</item>
+    </style>
+
+    <style name="darkGreen">
+        <item name="android:color">@color/darkGreen</item>
+    </style>
+
+    <style name="grey">
+        <item name="android:color">@color/grey</item>
+    </style>
+
+    <style name="banana">
+        <item name="android:color">@color/banana</item>
+    </style>
+
+    <style name="lightGrey">
+        <item name="android:color">@color/lightGrey</item>
+    </style>
+
+    <style name="grape">
+        <item name="android:color">@color/grape</item>
+    </style>
+
+    <style name="Forest">
+        <item name="android:color">@color/Forest</item>
+    </style>
+
+    <style name="teal">
+        <item name="android:color">@color/teal</item>
+    </style>
+
+    <style name="niceBlue">
+        <item name="android:color">@color/niceBlue</item>
+    </style>
+
+    <style name="niceYellow">
+        <item name="android:color">@color/niceYellow</item>
+    </style>
+
+    <style name="niceRed">
+        <item name="android:color">@color/niceRed</item>
+    </style>
+
+    <style name="niceGreen">
+        <item name="android:color">@color/niceGreen</item>
+    </style>
+
+    <style name="nicePurple">
+        <item name="android:color">@color/nicePurple</item>
+    </style>
+
+    <style name="NiceBlue">
+        <item name="android:color">@color/NiceBlue</item>
+    </style>
+
+    <style name="Note1">
+        <item name="android:color">@color/Note1</item>
+    </style>
+
+    <style name="Note2">
+        <item name="android:color">@color/Note2</item>
+    </style>
+
+    <style name="Note3">
+        <item name="android:color">@color/Note3</item>
+    </style>
+
+    <style name="Note4">
+        <item name="android:color">@color/Note4</item>
+    </style>
+
+    <style name="Note5">
+        <item name="android:color">@color/Note5</item>
+    </style>
+
+    <style name="Note6">
+        <item name="android:color">@color/Note6</item>
+    </style>
+
+    <style name="copy">
+        <item name="android:color">@color/copy</item>
+    </style>
+
+    <style name="copy2">
+        <item name="android:color">@color/copy2</item>
+    </style>
+
+    <style name="songGradient">
+        <item name="android:color">@color/songGradient</item>
+    </style>
 </resources>

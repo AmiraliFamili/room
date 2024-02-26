@@ -17,13 +17,68 @@
     <color name="grey">#242B2E</color>
     <color name="banana">#CCCC61</color>
     <color name="lightGrey">#ABABAB</color>
+    <color name="grape">#5E5A80</color>
+    <color name="Forest">#254117</color>
+    <color name="teal">#045D5D</color>
 
-    <color name="Note1">#659399</color>
-    <color name="Note2">#F1BD71</color>
-    <color name="Note3">#905763</color>
-    <color name="Note4">#6A9E6C</color>
-    <color name="Note5">#78629E</color>
-    <color name="Note6">#3F51B5</color>
+    <color name="niceBlue">#659399</color>
+    <color name="niceYellow">#F1BD71</color>
+    <color name="niceRed">#905763</color>
+    <color name="niceGreen">#6A9E6C</color>
+    <color name="nicePurple">#78629E</color>
+    <color name="NiceBlue">#3F51B5</color>
+
+    <color name="Note1">#6C9499</color>
+    <color name="Note2">#DCC198</color>
+    <color name="Note3">#956B74</color>
+    <color name="Note4">#729E74</color>
+    <color name="Note5">#8778A2</color>
+    <color name="Note6">#5865AB</color>
+
+    <color name="copy">#8D676F</color>
+    <color name="copy2">#7D666A</color>
+    <color name="songGradient">#333333</color>
+
+
+
+<!-- Dark Mode -->
+
+
+    <color name="black_dark">#FF000000</color>
+    <color name="white_dark">#9D9A9A</color>
+    <color name="background1.1_dark">#0E1041</color>
+    <color name="background1.2_dark">#301958</color>
+    <color name="background2.1_dark">#121212</color>
+    <color name="background2.2_dark">#2F2F2F</color>
+    <color name="orange_dark">#783722</color>
+    <color name="yellow_dark">#766C16</color>
+    <color name="green_dark">#1A411C</color>
+    <color name="yellow2_dark">#6A621C</color>
+    <color name="lightBlue_dark">#044F48</color>
+    <color name="darkRed_dark">#460F0F</color>
+    <color name="olive_dark">#273E0D</color>
+    <color name="darkGreen_dark">#173F06</color>
+    <color name="grey_dark">#132127</color>
+    <color name="banana_dark">#38381A</color>
+    <color name="lightGrey_dark">#4D2323</color>
+    <color name="grape_dark">#3C3384</color>
+    <color name="Forest_dark">#2F4126</color>
+    <color name="teal_dark">#123737</color>
+    <color name="niceBlue_dark">#4B5A5B</color>
+    <color name="niceYellow_dark">#5B4C35</color>
+    <color name="niceRed_dark">#4F3B3F</color>
+    <color name="niceGreen_dark">#374A38</color>
+    <color name="nicePurple_dark">#3F3A48</color>
+    <color name="NiceBlue_dark">#373B53</color>
+    <color name="Note1_dark">#37484A</color>
+    <color name="Note2_dark">#464036</color>
+    <color name="Note3_dark">#4C3E41</color>
+    <color name="Note4_dark">#364537</color>
+    <color name="Note5_dark">#413C4A</color>
+    <color name="Note6_dark">#363848</color>
+    <color name="copy_dark">#514245</color>
+    <color name="copy2_dark">#46393B</color>
+    <color name="songGradient_dark">#212020</color>
 
 
 </resources>

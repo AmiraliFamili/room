@@ -30,7 +30,7 @@ import com.google.android.material.navigation.NavigationView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Notes extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
+public class Notes extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener, NavigationView.OnNavigationItemSelectedListener {
 
     RecyclerView recyclerView;
     NotesListAdapter notesListAdapter;
@@ -53,6 +53,12 @@ public class Notes extends AppCompatActivity implements PopupMenu.OnMenuItemClic
         searchNotes = findViewById(R.id.search_notes);
         database = RoomDB.getInstance(this);
         notes = database.mainDAO().getAll();
+
+
+        NavigationView navigationView = findViewById(R.id.notes_nav_view);
+
+        // Set the listener
+        navigationView.setNavigationItemSelectedListener(this);
 
         updateRecycler(notes);
 
@@ -191,14 +197,51 @@ public class Notes extends AppCompatActivity implements PopupMenu.OnMenuItemClic
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_open_navigation) {
-            // Open the navigation drawer here
-            DrawerLayout drawer = findViewById(R.id.notes_main_page);
-            drawer.openDrawer(GravityCompat.START);
-            return true;
-        }
         return super.onOptionsItemSelected(item);
+    }
+
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        // Handle navigation item clicks here
+        int id = item.getItemId();
+        if (id == R.id.homeInNav){
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            return true;
+        } else if (id == R.id.noteInNav){
+            Intent intent = new Intent(this, Notes.class);
+            startActivity(intent);
+            return true;
+        }else if (id == R.id.musicInNav){
+            Intent intent = new Intent(this, SongPlayer.class);
+            startActivity(intent);
+            return true;
+        }else if (id == R.id.passwordInNav){
+            Intent intent = new Intent(this, passwordGN.class);
+            startActivity(intent);
+            return true;
+        }else if (id == R.id.galleryInNav){
+            Intent intent = new Intent(this, Gallery.class);
+            startActivity(intent);
+            return true;
+        }else if (id == R.id.calculatorInNav){
+            Intent intent = new Intent(this, calculator.class);
+            startActivity(intent);
+            return true;
+        }else if (id == R.id.aboutInNav){
+            Intent intent = new Intent(this, aboutUs.class);
+            startActivity(intent);
+            return true;
+        }else if (id == R.id.shareInNav){
+            Intent intent = new Intent(this, shareUs.class);
+            startActivity(intent);
+            return true;
+        }else if (id == R.id.rateInNav){
+            Intent intent = new Intent(this, rateUs.class);
+            startActivity(intent);
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

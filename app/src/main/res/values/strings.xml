@@ -1,5 +1,7 @@
 <resources>
-    <string name="app_name">room</string>
     <string name="nav_open">Open Navigation</string>
     <string name="nav_close">Close Navigation</string>
+    <string name="copy_write">All the rights are reserved for the developer, Amirali Famili</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

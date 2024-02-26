@@ -1,9 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
     <item
-        android:id="@+id/action_open_navigation"
-        android:title="Navigation"
-        app:showAsAction="always"
-        android:icon="@drawable/nav_setting"/>
+        android:title="Services">
+
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/homeInNav"
+                    android:title="Home"
+                    app:showAsAction="always"
+                    android:icon="@drawable/nav_home"/>
+
+                <item
+                    android:id="@+id/musicInNav"
+                    android:title="Music"
+                    app:showAsAction="always"
+                    android:icon="@drawable/nav_music"/>
+
+                <item
+                    android:id="@+id/noteInNav"
+                    android:title="Notes"
+                    app:showAsAction="always"
+                    android:icon="@drawable/nav_notes"/>
+
+                <item
+                    android:id="@+id/passwordInNav"
+                    android:title="Password Generator"
+                    app:showAsAction="always"
+                    android:icon="@drawable/nav_password"/>
+
+
+                <item
+                    android:id="@+id/galleryInNav"
+                    android:title="Gallery"
+                    app:showAsAction="always"
+                    android:icon="@drawable/nav_gallery"/>
+
+                <item
+                    android:id="@+id/calculatorInNav"
+                    android:title="Calculator"
+                    app:showAsAction="always"
+                    android:icon="@drawable/nav_calculate"/>
+
+            </group>
+        </menu>
+
+    </item>
+
+    <item
+        android:title="">
+
+        <menu>
+            <group android:checkableBehavior="single">
+
+                <item
+                    android:id="@+id/aboutInNav"
+                    android:title="About Us"
+                    app:showAsAction="always"
+                    android:icon="@drawable/nav_about"/>
+            </group>
+        </menu>
+
+    </item>
+
+    <item
+        android:title="">
+
+        <menu>
+            <group android:checkableBehavior="single">
+
+                <item
+                    android:id="@+id/shareInNav"
+                    android:title="Share"
+                    app:showAsAction="always"
+                    android:icon="@drawable/nav_share"/>
+
+                <item
+                    android:id="@+id/rateInNav"
+                    android:title="Rate Us"
+                    app:showAsAction="always"
+                    android:icon="@drawable/nav_rate_us"/>
+
+            </group>
+        </menu>
+
+    </item>
+
+    <item android:title="">
+
+    </item>
+
+
+
 </menu>

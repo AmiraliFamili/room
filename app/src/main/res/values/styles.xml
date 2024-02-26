@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="MyMenuItemStyle" parent="Widget.AppCompat.Light.PopupMenu">
+        <item name="android:background">@color/grey</item>
+    </style>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="popupMenuStyle">@style/AppTheme.PopupMenu</item>
+
+    </style>
+
+    <style name="PlayingSongs" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="popupMenuStyle">@style/AppTheme.PopupMenu</item>
+    </style>
+
+    <style name="AppTheme.PopupMenu" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="CustomButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/black_background</item>
+        <item name="android:textColor">@color/niceYellow</item>
+    </style>
+
+</resources>

@@ -4,4 +4,144 @@
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
     </style>
+
+    <style name="black">
+        <item name="android:color">@color/black_dark</item>
+    </style>
+
+    <style name="white">
+        <item name="android:color">@color/white_dark</item>
+    </style>
+
+    <style name="background1_1">
+        <item name="android:color">@color/background1.1_dark</item>
+    </style>
+
+    <style name="background1_2">
+        <item name="android:color">@color/background1.2_dark</item>
+    </style>
+
+    <style name="background2_1">
+        <item name="android:color">@color/background2.1_dark</item>
+    </style>
+
+    <style name="background2_2">
+        <item name="android:color">@color/background2.2_dark</item>
+    </style>
+
+    <style name="orange">
+        <item name="android:color">@color/orange_dark</item>
+    </style>
+
+    <style name="yellow">
+        <item name="android:color">@color/yellow_dark</item>
+    </style>
+
+    <style name="green">
+        <item name="android:color">@color/green_dark</item>
+    </style>
+
+    <style name="yellow2">
+        <item name="android:color">@color/yellow2_dark</item>
+    </style>
+
+    <style name="lightBlue">
+        <item name="android:color">@color/lightBlue_dark</item>
+    </style>
+
+    <style name="darkRed">
+        <item name="android:color">@color/darkRed_dark</item>
+    </style>
+
+    <style name="olive">
+        <item name="android:color">@color/olive_dark</item>
+    </style>
+
+    <style name="darkGreen">
+        <item name="android:color">@color/darkGreen_dark</item>
+    </style>
+
+    <style name="grey">
+        <item name="android:color">@color/grey_dark</item>
+    </style>
+
+    <style name="banana">
+        <item name="android:color">@color/banana_dark</item>
+    </style>
+
+    <style name="lightGrey">
+        <item name="android:color">@color/lightGrey_dark</item>
+    </style>
+
+    <style name="grape">
+        <item name="android:color">@color/grape_dark</item>
+    </style>
+
+    <style name="Forest">
+        <item name="android:color">@color/Forest_dark</item>
+    </style>
+
+    <style name="teal">
+        <item name="android:color">@color/teal_dark</item>
+    </style>
+
+    <style name="niceBlue">
+        <item name="android:color">@color/niceBlue_dark</item>
+    </style>
+
+    <style name="niceYellow">
+        <item name="android:color">@color/niceYellow_dark</item>
+    </style>
+
+    <style name="niceRed">
+        <item name="android:color">@color/niceRed_dark</item>
+    </style>
+
+    <style name="niceGreen">
+        <item name="android:color">@color/niceGreen_dark</item>
+    </style>
+
+    <style name="nicePurple">
+        <item name="android:color">@color/nicePurple_dark</item>
+    </style>
+
+    <style name="NiceBlue">
+        <item name="android:color">@color/NiceBlue_dark</item>
+    </style>
+
+    <style name="Note1">
+        <item name="android:color">@color/Note1_dark</item>
+    </style>
+
+    <style name="Note2">
+        <item name="android:color">@color/Note2_dark</item>
+    </style>
+
+    <style name="Note3">
+        <item name="android:color">@color/Note3_dark</item>
+    </style>
+
+    <style name="Note4">
+        <item name="android:color">@color/Note4_dark</item>
+    </style>
+
+    <style name="Note5">
+        <item name="android:color">@color/Note5_dark</item>
+    </style>
+
+    <style name="Note6">
+        <item name="android:color">@color/Note6_dark</item>
+    </style>
+
+    <style name="copy">
+        <item name="android:color">@color/copy_dark</item>
+    </style>
+
+    <style name="copy2">
+        <item name="android:color">@color/copy2_dark</item>
+    </style>
+
+    <style name="songGradient">
+        <item name="android:color">@color/songGradient_dark</item>
+    </style>
 </resources>

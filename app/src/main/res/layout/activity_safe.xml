@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_4_op"
+    tools:context=".passwordGN">
+
+    <!-- Toolbar -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/safe_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@android:color/transparent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:navigationIcon="@drawable/navigation_menu_icon"/>
+
+    <!-- DrawerLayout -->
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/safe_main_page"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/safe_toolbar">
+
+        <!-- Main Content Layout -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginHorizontal="40dp"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/ShowPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Password"
+                android:textColor="@color/grey"
+                android:textAlignment="center"
+                android:textSize="30dp"
+                android:layout_marginBottom="10dp" /> <!-- Add margin bottom here -->
+
+            <Button
+                android:layout_width="match_parent"
+                android:id="@+id/copyPassword"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:backgroundTint="@color/copy"
+                android:gravity="center"
+                android:textColor="@color/background2.2"
+                android:text="Copy"
+                android:textStyle="normal"
+                android:textSize="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Password Size "/>
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/password_length"
+                    android:maxLines="7"
+                    android:hint="Enter Your Password Size..."
+                    android:textColor="@color/Note2"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <CheckBox
+                    android:id="@+id/checkBoxLowercase"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:text="Lower Case Letters" />
+
+                <CheckBox
+                    android:id="@+id/checkBoxUppercase"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:text="Upper Case Letters" />
+
+                <CheckBox
+                    android:id="@+id/checkBoxNumeric"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:text="Numeric Value" />
+
+                <CheckBox
+                    android:id="@+id/checkBoxSpecialChars"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:text="Special Characters" />
+
+                <Button
+                    android:id="@+id/GenerateButton"
+                    android:layout_width="224dp"
+                    android:layout_height="63dp"
+                    android:backgroundTint="@android:color/transparent"
+                    android:layout_marginStart="110dp"
+                    android:layout_marginEnd="20dp"
+                    android:textSize="25dp"
+                    android:textColor="@color/black"
+                    android:text=":)" />
+
+                <TextView
+                    android:id="@+id/textErrorMessage"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:textColor="@color/darkRed"
+                    android:textSize="20sp"
+                    android:text=""/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <!-- NavigationView -->
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/safe_nav_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="@drawable/background_4_op"
+            app:headerLayout="@layout/nav_header"
+            app:menu="@menu/navigation_menu"
+            app:itemIconTint="@color/niceRed"
+            app:itemTextColor="@color/Note1"/>
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+
+</RelativeLayout>

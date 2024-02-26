@@ -2,20 +2,60 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PROJECTION" />
+
     <application
+        android:name=".ApplicationClass"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="room"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Room"
         tools:targetApi="31">
         <activity
-            android:name=".NotesTaker"
-            android:theme="@style/Base.Theme.Room"
+            android:name=".shareUs"
             android:exported="false" />
+        <activity
+            android:name=".aboutUs"
+            android:exported="false" />
+        <activity
+            android:name=".rateUs"
+            android:exported="false" />
+        <activity
+            android:name=".calculator"
+            android:exported="false" />
+        <activity
+            android:name=".ImageFullActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Gallery"
+            android:exported="false" />
+        <activity
+            android:name=".AlbumDetails"
+            android:exported="false" />
+        <activity
+            android:name=".PlayingSongs"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".SongPlayer"
+            android:exported="false"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
+        <activity
+            android:name=".passwordGN"
+            android:exported="false" />
+        <activity
+            android:name=".NotesTaker"
+            android:exported="false"
+            android:theme="@style/Base.Theme.Room" />
         <activity
             android:name=".dashboardVideo"
             android:exported="false" />
@@ -32,6 +72,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name=".MusicService"
+            android:enabled="true"
+            android:foregroundServiceType="mediaPlayback|mediaProjection" />
+
+        <receiver
+            android:name=".NotificationReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="actionpre" />
+                <action android:name="actionnext" />
+                <action android:name="actionplay" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
