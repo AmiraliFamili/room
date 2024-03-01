@@ -21,6 +21,15 @@ import java.util.Calendar;
 import mehdi.sakout.aboutpage.AboutPage;
 import mehdi.sakout.aboutpage.Element;
 
+
+/**
+ * @see aboutUs
+ *
+ *      - Class aboutUs is responsible for creating a about us page using the
+ *      mehdi.sakout library, this library is specifically designed to create about us pages.
+ *
+ * @author Amirali Famili
+ */
 public class aboutUs extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +39,7 @@ public class aboutUs extends AppCompatActivity {
 
 
 
+        // 0 is for day, 1 is for night mode
         simulateDayNight(1);
 
 
@@ -54,6 +64,11 @@ public class aboutUs extends AppCompatActivity {
         setContentView(aboutPage);
     }
 
+    /**
+     *      - This method will take an integer as input and sets the theme of the about us page,
+     *      0 is white (day mode) and 1 is black (dark theme)
+     *
+     */
     private void simulateDayNight(int setting) {
 
         int DAY = 0;
@@ -70,11 +85,15 @@ public class aboutUs extends AppCompatActivity {
         }
     }
 
+    /**
+     *      - This method is responsible for customizing the Rights part of the about us page.
+     *
+     */
     Element getCopyRightsElement() {
         Element copyRightsElement = new Element();
         @SuppressLint({"StringFormatInvalid", "LocalSuppress"}) final String copyrights = String.format(getString(R.string.copy_write), Calendar.getInstance().get(Calendar.YEAR));
         copyRightsElement.setTitle(copyrights);
-        copyRightsElement.setIconDrawable(R.drawable.dark);
+        copyRightsElement.setIconDrawable(R.drawable.baseline_lightbulb_24);
         copyRightsElement.setAutoApplyIconTint(true);
         copyRightsElement.setIconTint(mehdi.sakout.aboutpage.R.color.about_item_icon_color);
         copyRightsElement.setIconNightTint(android.R.color.white);

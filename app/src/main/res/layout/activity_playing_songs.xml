@@ -7,7 +7,7 @@
     android:id="@+id/songContainerPlaying"
     android:orientation="vertical"
     android:background="@drawable/background_songs"
-    tools:context=".PlayingSongs">
+    tools:context=".music_PlayingSongs">
 
     <RelativeLayout
         android:layout_width="match_parent"

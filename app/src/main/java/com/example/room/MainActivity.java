@@ -12,6 +12,17 @@ import android.widget.MediaController;
 import android.widget.VideoView;
 import android.widget.LinearLayout;
 
+import com.example.room.Gallery.Gallery;
+import com.example.room.pass.passwordGN;
+
+/**
+ * @see MainActivity
+ *
+ *      - MainActivity Class is the first activity the user will see when the application is up and running,
+ *      This class holder several clickable cards and a video, and holdes all the main services this app delivers and can be considered a holder for these services.
+ *
+ * @author Amirali Famili
+ */
 public class MainActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE_HOME = 1;
@@ -31,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        if(!startingVideoPlayed){
+        if(!startingVideoPlayed){ // play the initial video
             video = findViewById(R.id.myVideo);
             media = new MediaController(this);
             String startingVideoPath = "android.resource://" + getPackageName() + "/" + R.raw.music;
@@ -41,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
             video.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override
                 public void onPrepared(MediaPlayer mp) {
-                    mp.setLooping(false); // Set looping true to loop the video
+                    mp.setLooping(false);
                     video.start();
                 }
             });
@@ -55,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
             });
         }
 
+        // play the dashboard video after the initial video
         dashboardLayout = findViewById(R.id.linearLayout);
         dashboardVideo = findViewById(R.id.DashboardVideo);
         media = new MediaController(this);
@@ -83,54 +95,63 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // User Clicks on the Cards :
+        // User Clicks on the Cards ------------------------------------
+
+
+        // -------------    Notes Activity    ------------- //
+
         LinearLayout category1CardView = findViewById(R.id.Category1);
         category1CardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Start a new activity when the CardView is clicked
                 Intent intent = new Intent(MainActivity.this, Notes.class);
                 startActivity(intent);
             }
         });
 
+
+        // -------------    Password Generator Activity    ------------- //
+
         LinearLayout category2CardView = findViewById(R.id.Category2);
         category2CardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Start a new activity when the CardView is clicked
                 Intent intent = new Intent(MainActivity.this, passwordGN.class);
                 startActivity(intent);
             }
         });
 
+
+        // -------------    Music Activity    ------------- //
+
         LinearLayout category3CardView = findViewById(R.id.Category3);
         category3CardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Start a new activity when the CardView is clicked
-                Intent intent = new Intent(MainActivity.this, SongPlayer.class);
+                Intent intent = new Intent(MainActivity.this, music_main.class);
                 startActivity(intent);
             }
         });
 
 
+        // -------------    Gallery Activity    ------------- //
+
         LinearLayout category4CardView = findViewById(R.id.Category4);
         category4CardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Start a new activity when the CardView is clicked
                 Intent intent = new Intent(MainActivity.this, Gallery.class);
                 startActivity(intent);
             }
         });
 
 
+        // -------------    Calculator Activity    ------------- //
+
         LinearLayout category5CardView = findViewById(R.id.Category5);
         category5CardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Start a new activity when the CardView is clicked
                 Intent intent = new Intent(MainActivity.this, calculator.class);
                 startActivity(intent);
             }
@@ -145,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE_HOME && resultCode == RESULT_OK) {
             // User returned from the home intent
-            startingVideoPlayed = true; // Set the flag to true
+            startingVideoPlayed = true;
         }
     }
 
@@ -153,10 +174,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         if (video.isPlaying()) {
-            video.pause(); // Pause the video when the activity is paused
+            video.pause();
         }
         if (dashboardVideo.isPlaying()) {
-            dashboardVideo.pause(); // Pause the dashboard video when the activity is paused
+            dashboardVideo.pause();
         }
     }
 
@@ -164,11 +185,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         if (!dashboardVideo.isPlaying() && dashboardVideoPlaying) {
-            dashboardVideo.start(); // Resume the dashboard video when the activity is resumed
+            dashboardVideo.start();
         }
     }
 
-    private void showDashboard() {
+    private void showDashboard() { // setting all the elements in main activity to visible after the video is played
         dashboardLayout.setVisibility(View.VISIBLE);
         dashboardVideo.setVisibility(View.VISIBLE);
     }

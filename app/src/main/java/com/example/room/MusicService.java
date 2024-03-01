@@ -1,11 +1,11 @@
 package com.example.room;
 
-        import static com.example.room.ApplicationClass.ACTION_NEXT;
-        import static com.example.room.ApplicationClass.ACTION_PLAY;
-        import static com.example.room.ApplicationClass.ACTION_PREVIOUS;
-        import static com.example.room.ApplicationClass.CHANNEL_ID_1;
-        import static com.example.room.ApplicationClass.CHANNEL_ID_2;
-        import static com.example.room.PlayingSongs.songList;
+        import static com.example.room.music_ApplicationClass.ACTION_NEXT;
+        import static com.example.room.music_ApplicationClass.ACTION_PLAY;
+        import static com.example.room.music_ApplicationClass.ACTION_PREVIOUS;
+        import static com.example.room.music_ApplicationClass.CHANNEL_ID_1;
+        import static com.example.room.music_ApplicationClass.CHANNEL_ID_2;
+        import static com.example.room.music_PlayingSongs.songList;
 
         import android.app.Notification;
         import android.app.NotificationChannel;
@@ -25,7 +25,6 @@ package com.example.room;
         import android.support.v4.media.session.MediaSessionCompat;
         import android.util.Log;
         import android.widget.RemoteViews;
-        import android.widget.Toast;
 
         import androidx.annotation.Nullable;
         import androidx.core.app.NotificationCompat;
@@ -39,11 +38,11 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
 
     IBinder binders = new binder();
     MediaPlayer mediaPlayer;
-    ArrayList<MusicFiles> musicFiles = new ArrayList<>();
+    ArrayList<music_Files> musicFiles = new ArrayList<>();
     Uri uri;
     int position = -1;
 
-    ActionPlaying actionPlaying;
+    music_ActionPlaying actionPlaying;
     MediaSessionCompat mediaSessionCompat;
 
     @Override
@@ -164,7 +163,7 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
 
     }
 
-    void setCallBack(ActionPlaying actionPlaying) {
+    void setCallBack(music_ActionPlaying actionPlaying) {
         this.actionPlaying = actionPlaying;
     }
 
@@ -192,16 +191,16 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
             notificationManager.createNotificationChannel(channel2);
         }
 
-        Intent intent = new Intent(this, PlayingSongs.class);
+        Intent intent = new Intent(this, music_PlayingSongs.class);
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
-        Intent prevIntent = new Intent(this, NotificationReceiver.class).setAction(ACTION_PREVIOUS);
+        Intent prevIntent = new Intent(this, music_NotificationReceiver.class).setAction(ACTION_PREVIOUS);
         PendingIntent prevPending = PendingIntent.getBroadcast(this, 0, prevIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        Intent pauseIntent = new Intent(this, NotificationReceiver.class).setAction(ACTION_PLAY);
+        Intent pauseIntent = new Intent(this, music_NotificationReceiver.class).setAction(ACTION_PLAY);
         PendingIntent pausePending = PendingIntent.getBroadcast(this, 0, pauseIntent, PendingIntent.FLAG_UPDATE_CURRENT); // Use unique requestCode
 
-        Intent nextIntent = new Intent(this, NotificationReceiver.class).setAction(ACTION_NEXT);
+        Intent nextIntent = new Intent(this, music_NotificationReceiver.class).setAction(ACTION_NEXT);
         PendingIntent nextPending = PendingIntent.getBroadcast(this, 0, nextIntent, PendingIntent.FLAG_UPDATE_CURRENT); // Use unique requestCode
 
         Bitmap thumb = null;

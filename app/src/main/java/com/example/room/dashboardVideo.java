@@ -11,6 +11,18 @@ import android.view.View;
 import android.widget.MediaController;
 import android.widget.VideoView;
 
+
+/**
+ * @see dashboardVideo
+ *
+ *      - Class dashboardVideo is called when user clicks on the live dashboard in the main activity.
+ *      on creation of this class a video is played at the background and 3 helper cards are displayed to help
+ *      user to navigate to where they want to go.
+ *
+ * @Note This class has no other helper class
+ *
+ * @author Amirali Famili
+ */
 public class dashboardVideo extends AppCompatActivity {
 
     CardView homeDash, aboutDash, shareDash;
@@ -20,7 +32,7 @@ public class dashboardVideo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard_video);
 
-        setListeners();
+        setListeners(); // initialise the cards
 
         video = findViewById(R.id.videoViewBackground);
 
@@ -28,11 +40,8 @@ public class dashboardVideo extends AppCompatActivity {
         String videoPath = "android.resource://" + getPackageName() + "/" + R.raw.dashvid;
         Uri videoUri = Uri.parse(videoPath);
         video.setVideoURI(videoUri);
-
-        // Start video
         video.start();
 
-        // Set looping true to loop the video
         video.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
@@ -41,7 +50,7 @@ public class dashboardVideo extends AppCompatActivity {
         });
     }
 
-    private void setListeners() {
+    private void setListeners() { // initialise the cards and set listeners
         homeDash = findViewById(R.id.homeDash);
         aboutDash = findViewById(R.id.aboutDash);
         shareDash = findViewById(R.id.shareDash);

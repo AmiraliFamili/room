@@ -3,7 +3,6 @@ package com.example.room;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
@@ -11,11 +10,21 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.room.Gallery.Gallery;
+import com.example.room.pass.passwordGN;
 import com.google.android.material.navigation.NavigationView;
 
+/**
+ * @see calculator
+ *
+ *      - Class calculator is a single class responsible for the entire calculator backend operations.
+ *
+ * @Note This class has no other helper class
+ *
+ * @author Amirali Famili
+ */
 public class calculator extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     TextView b1, b2, b3, b4, b5, b6, b7, b8, b9, b0, bdot, bpi, bequal, bplus, bmin, bmul, bdiv, binv, bsquare, bfact, bln, blog,bsqrt, btan, bcos, bsin, bb1, bb2, bc, bac, tvsec, tvmain;
@@ -27,14 +36,12 @@ public class calculator extends AppCompatActivity implements NavigationView.OnNa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculator);
 
-        initialise();
+        initialise();// initialise elements
 
+        // set the navigation menu on the top left
         NavigationView navigationView = findViewById(R.id.notes_nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
-
         drawerLayout = findViewById(R.id.notes_main_page);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar, R.string.nav_open, R.string.nav_close);
@@ -42,6 +49,7 @@ public class calculator extends AppCompatActivity implements NavigationView.OnNa
         toggle.syncState();
 
 
+        // setting on click listener for all elements inside the calculator's layout
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -261,6 +269,16 @@ public class calculator extends AppCompatActivity implements NavigationView.OnNa
         });
     }
 
+    /**
+     *
+     *      - This method is calculates the factorial of a given integer as input.
+     *
+     *
+     * @param n : an integer
+     *
+     *
+     * @return n!
+     */
     private int factorial(int n) {
         if (n < 0) {
             throw new RuntimeException("Undefined for : " + n);
@@ -273,6 +291,17 @@ public class calculator extends AppCompatActivity implements NavigationView.OnNa
     }
 
 
+    /**
+     *
+     *      - Since when the user clicks on a function on calculator like log, the text "log" will be added the to string
+     *      This method will parse that string and extract the meaningful symbols form the text and produce results from them.
+     *
+     *
+     * @param  str : input from the calculator
+     *
+     *
+     * @return val : the returned value is a double which is the answer to the math problem
+     */
     private static double eval(final String str){
         return new Object(){
             int pos = -1, ch;
@@ -293,31 +322,32 @@ public class calculator extends AppCompatActivity implements NavigationView.OnNa
             double parse(){
                 nextChar();
                 double x = parseExpression();
-                if (pos < str.length()) throw  new RuntimeException("Unexpected : " + (char)ch);
-                return x;
+                if (pos < str.length()) {
+                    throw new RuntimeException("Unexpected : " + (char) ch);
+                }return x;
             }
 
             double parseExpression(){
                 double x = parseTerm();
                 for (;;){
-                    if (eat('+')) x += parseTerm();
-                    else if (eat('-')) x += parseTerm();
-                    else return x;
+                    if (eat('+')) {x += parseTerm();}
+                    else if (eat('-')){ x += parseTerm();}
+                    else {return x;}
                 }
             }
 
             double parseTerm(){
                 double x = parseFactor();
                 for (;;){
-                    if (eat('*')) x *= parseFactor();
-                    else if (eat('/')) x /= parseFactor();
-                    else return x;
+                    if (eat('*')){ x *= parseFactor();}
+                    else if (eat('/')){ x /= parseFactor();}
+                    else {return x;}
                 }
             }
 
             double parseFactor(){
-                if (eat('+')) return parseFactor();
-                else if (eat('-')) return -parseFactor();
+                if (eat('+')){ return parseFactor();}
+                else if (eat('-')) {return -parseFactor();}
 
                 double x;
                 int startPos = this.pos;
@@ -330,23 +360,26 @@ public class calculator extends AppCompatActivity implements NavigationView.OnNa
                     while (ch >= 'a' && ch <= 'z') nextChar();
                     String func = str.substring(startPos, this.pos);
                     x = parseFactor();
-                    if (func.equals("sqrt")) x = Math.sqrt(x);
-                    else if (func.equals("sin")) x = Math.sin(Math.toRadians(x));
-                    else if (func.equals("cos")) x = Math.cos(Math.toRadians(x));
-                    else if (func.equals("tan")) x = Math.tan(Math.toRadians(x));
-                    else if (func.equals("log")) x = Math.log10(x);
-                    else if (func.equals("ln")) x = Math.log(x);
-                    else throw new RuntimeException("Unknown Function : " + func);
+                    if (func.equals("sqrt")) {x = Math.sqrt(x);}
+                    else if (func.equals("sin")){ x = Math.sin(Math.toRadians(x));}
+                    else if (func.equals("cos")){ x = Math.cos(Math.toRadians(x));}
+                    else if (func.equals("tan")){ x = Math.tan(Math.toRadians(x));}
+                    else if (func.equals("log")){ x = Math.log10(x);}
+                    else if (func.equals("ln")){ x = Math.log(x);}
+                    else {throw new RuntimeException("Unknown Function : " + func);}
                 } else {
                     throw new RuntimeException("Unknown Operator : " + (char)ch);
                 }
-                if (eat('^')) x = Math.pow(x, parseFactor());
+                if (eat('^')) {x = Math.pow(x, parseFactor());}
                 return x;
             }
         }.parse();
     }
 
-
+    /**
+     *
+     *      - Initialise all elements.
+     */
     private void initialise(){
         b1 = findViewById(R.id.b1);
         b2 = findViewById(R.id.b2);
@@ -383,9 +416,13 @@ public class calculator extends AppCompatActivity implements NavigationView.OnNa
     }
 
 
-
-
-
+    /**
+     *      - This method is responsible for redirecting user to the correct activity when they click on the items listed on the navigation menu.
+     *
+     * @param item : id of the item user clicked on it
+     *
+     * @return true if item exists, false if it doesn't
+     */
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation item clicks here
         int id = item.getItemId();
@@ -398,7 +435,7 @@ public class calculator extends AppCompatActivity implements NavigationView.OnNa
             startActivity(intent);
             return true;
         }else if (id == R.id.musicInNav){
-            Intent intent = new Intent(this, SongPlayer.class);
+            Intent intent = new Intent(this, music_main.class);
             startActivity(intent);
             return true;
         }else if (id == R.id.passwordInNav){

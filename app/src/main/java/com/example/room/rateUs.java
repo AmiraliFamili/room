@@ -11,7 +11,21 @@ import android.view.MenuItem;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
+import com.example.room.Gallery.Gallery;
+import com.example.room.pass.passwordGN;
 import com.google.android.material.navigation.NavigationView;
+
+
+/**
+ * @see rateUs
+ *
+ *      - rateUs is a simple activity containing just a star bar for capturing the user's general review,
+ *      it does not yet contain a method for storing that review.
+ *
+ * @Notes This class is just a demo class and does not provide an important service to users.
+ *
+ * @author Amirali Famili
+ */
 
 public class rateUs extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -23,9 +37,10 @@ public class rateUs extends AppCompatActivity implements NavigationView.OnNaviga
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rate_us);
 
+
+        // set the nav view and it's button
         NavigationView navigationView = findViewById(R.id.notes_nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
         drawerLayout = findViewById(R.id.notes_main_page);
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -39,6 +54,8 @@ public class rateUs extends AppCompatActivity implements NavigationView.OnNaviga
 
         ratingStar = findViewById(R.id.ratingBar);
 
+
+        // display a text corresponding to the user's experience with the app
             ratingStar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
                 @Override
                 public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
@@ -74,7 +91,13 @@ public class rateUs extends AppCompatActivity implements NavigationView.OnNaviga
 
     }
 
-
+    /**
+     *      - This method is responsible for redirecting user to the correct activity when they click on the items listed on the navigation menu.
+     *
+     * @param item : id of the item user clicked on it
+     *
+     * @return true if item exists, false if it doesn't
+     */
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation item clicks here
         int id = item.getItemId();
@@ -87,7 +110,7 @@ public class rateUs extends AppCompatActivity implements NavigationView.OnNaviga
             startActivity(intent);
             return true;
         }else if (id == R.id.musicInNav){
-            Intent intent = new Intent(this, SongPlayer.class);
+            Intent intent = new Intent(this, music_main.class);
             startActivity(intent);
             return true;
         }else if (id == R.id.passwordInNav){

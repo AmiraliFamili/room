@@ -7,12 +7,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.SearchView;
 import androidx.cardview.widget.CardView;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
-import androidx.room.Room;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -24,12 +22,31 @@ import android.widget.Toast;
 
 import com.example.room.Adapters.NotesListAdapter;
 import com.example.room.Database.RoomDB;
+import com.example.room.Gallery.Gallery;
+import com.example.room.pass.passwordGN;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * @see Notes
+ *
+ *      - Notes class is responsible for main operations and interactions of user with their notes, is linked with 4 different packages
+ *      and with the help of the packages can take user's notes and store them in an database called Room which is imported to the project from androidx.
+ *
+ * @package Database, with classes : RoomDB, MainDataAccessObject
+ * @package Models, with class : Notes (different file from this one)
+ * @package Adapters, with classes : NotesListAdapter, NotesViewHolder
+ * @package room , which is the main package that the project is implemented in
+ *
+ *
+ * @Extra This class uses the packages above to communicate with the Room database and operate different operations on notes and their containers, like changing their color to a random value.
+ *
+ * @author Amirali Famili
+ */
 public class Notes extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener, NavigationView.OnNavigationItemSelectedListener {
 
     RecyclerView recyclerView;
@@ -41,8 +58,6 @@ public class Notes extends AppCompatActivity implements PopupMenu.OnMenuItemClic
     com.example.room.Models.Notes pinned;
 
     private DrawerLayout drawerLayout;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,9 +70,8 @@ public class Notes extends AppCompatActivity implements PopupMenu.OnMenuItemClic
         notes = database.mainDAO().getAll();
 
 
+        // set the Nav View
         NavigationView navigationView = findViewById(R.id.notes_nav_view);
-
-        // Set the listener
         navigationView.setNavigationItemSelectedListener(this);
 
         updateRecycler(notes);
@@ -83,8 +97,9 @@ public class Notes extends AppCompatActivity implements PopupMenu.OnMenuItemClic
             }
         });
 
-        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
 
+        // Set Nav Menu and it's button
+        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         drawerLayout = findViewById(R.id.notes_main_page);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar, R.string.nav_open, R.string.nav_close);
@@ -95,6 +110,12 @@ public class Notes extends AppCompatActivity implements PopupMenu.OnMenuItemClic
 
 
 
+    /**
+     *
+     *      - filter method is called everytime user enters a character in the search bar within the Notes Activity,
+     *      and finds the relevant search result in both note's title and body.
+     *
+     */
     private void filter(String newText){
         List<com.example.room.Models.Notes> filtered = new ArrayList<>();
         for (com.example.room.Models.Notes note : notes) {
@@ -106,6 +127,12 @@ public class Notes extends AppCompatActivity implements PopupMenu.OnMenuItemClic
         notesListAdapter.filter(filtered);
     }
 
+
+    /**
+     *
+     *      - this method is responsible for updating and inserting notes to the database.
+     *
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -134,6 +161,9 @@ public class Notes extends AppCompatActivity implements PopupMenu.OnMenuItemClic
         }
     }
 
+    /**
+     *      - update the recycler view
+     */
     private void updateRecycler(List<com.example.room.Models.Notes> notes) {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL));
@@ -157,6 +187,9 @@ public class Notes extends AppCompatActivity implements PopupMenu.OnMenuItemClic
         }
     };
 
+    /**
+     *      - show a popup menu for delete and pin operations
+     */
     private void showPopUpDialog(CardView cardView) {
         PopupMenu popup = new PopupMenu(this, cardView);
         popup.setOnMenuItemClickListener(this);
@@ -164,6 +197,10 @@ public class Notes extends AppCompatActivity implements PopupMenu.OnMenuItemClic
         popup.show();
     }
 
+
+    /**
+     *      - when user clicks on an item on pop up menu
+     */
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         if (item.getItemId() == R.id.pin) {
@@ -190,7 +227,7 @@ public class Notes extends AppCompatActivity implements PopupMenu.OnMenuItemClic
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu) { // create menu
         getMenuInflater().inflate(R.menu.navigation_menu, menu);
         return true;
     }
@@ -200,6 +237,14 @@ public class Notes extends AppCompatActivity implements PopupMenu.OnMenuItemClic
         return super.onOptionsItemSelected(item);
     }
 
+
+    /**
+     *      - This method is responsible for redirecting user to the correct activity when they click on the items listed on the navigation menu.
+     *
+     * @param item : id of the item user clicked on it
+     *
+     * @return true if item exists, false if it doesn't
+     */
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation item clicks here
         int id = item.getItemId();
@@ -212,7 +257,7 @@ public class Notes extends AppCompatActivity implements PopupMenu.OnMenuItemClic
             startActivity(intent);
             return true;
         }else if (id == R.id.musicInNav){
-            Intent intent = new Intent(this, SongPlayer.class);
+            Intent intent = new Intent(this, music_main.class);
             startActivity(intent);
             return true;
         }else if (id == R.id.passwordInNav){

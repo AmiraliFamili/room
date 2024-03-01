@@ -14,8 +14,20 @@ import android.view.View;
 import android.widget.MediaController;
 import android.widget.VideoView;
 
+import com.example.room.Gallery.Gallery;
+import com.example.room.pass.passwordGN;
 import com.google.android.material.navigation.NavigationView;
 
+
+
+/**
+ * @see shareUs
+ *
+ *      - shareUs is a simple activity with just a single video as the layout, when user clicks on the video, a new
+ *      intent share page which enables users to share this app among other apps.
+ *
+ * @author Amirali Famili
+ */
 public class shareUs extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     VideoView video;
@@ -30,9 +42,9 @@ public class shareUs extends AppCompatActivity implements NavigationView.OnNavig
         setContentView(R.layout.activity_share_us);
 
 
+        // set the nav view and it's button
         NavigationView navigationView = findViewById(R.id.notes_nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
         drawerLayout = findViewById(R.id.notes_main_page);
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -44,6 +56,7 @@ public class shareUs extends AppCompatActivity implements NavigationView.OnNavig
         toggle.syncState();
 
 
+        // set the video
         video = findViewById(R.id.aboutUsVid);
         media = new MediaController(this);
         String startingVideoPath = "android.resource://" + getPackageName() + "/" + R.raw.sharevideo;
@@ -58,6 +71,7 @@ public class shareUs extends AppCompatActivity implements NavigationView.OnNavig
             }
         });
 
+        // when user clicks on the video
         video.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,7 +101,13 @@ public class shareUs extends AppCompatActivity implements NavigationView.OnNavig
         }
     }
 
-
+    /**
+     *      - This method is responsible for redirecting user to the correct activity when they click on the items listed on the navigation menu.
+     *
+     * @param item : id of the item user clicked on it
+     *
+     * @return true if item exists, false if it doesn't
+     */
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation item clicks here
         int id = item.getItemId();
@@ -100,7 +120,7 @@ public class shareUs extends AppCompatActivity implements NavigationView.OnNavig
             startActivity(intent);
             return true;
         }else if (id == R.id.musicInNav){
-            Intent intent = new Intent(this, SongPlayer.class);
+            Intent intent = new Intent(this, music_main.class);
             startActivity(intent);
             return true;
         }else if (id == R.id.passwordInNav){

@@ -15,6 +15,15 @@ import com.example.room.Models.Notes;
 
 import java.util.Date;
 
+
+/**
+ * @see NotesTaker
+ *
+ *      - NotesTaker class is responsible for taking the raw text from user notes and correct it's format, validate it and add
+ *      date and time to it, then it deals with updating or inserting the new note by sending the result to the main Notes activity.
+ *
+ * @author Amirali Famili
+ */
 public class NotesTaker extends AppCompatActivity {
 
     EditText textEditor_title, textEditor_notes;
@@ -32,6 +41,8 @@ public class NotesTaker extends AppCompatActivity {
         textEditor_notes = findViewById(R.id.textEditor_notes);
 
         notes = new Notes();
+
+        // check if the user is updating their note
         try {
             notes = (Notes) getIntent().getSerializableExtra("old_note");
             textEditor_title.setText(notes.getTitle());
@@ -50,12 +61,14 @@ public class NotesTaker extends AppCompatActivity {
                     Toast.makeText(NotesTaker.this, "Ur Note Is Empty!", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
                 SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, d MMM yyyy HH:mm a");
                 Date date = new Date();
 
                 if (!oldNote) {
                     notes = new Notes();
                 }
+
                 notes.setTitle(title);
                 notes.setNotes(description);
                 notes.setDate(dateFormat.format(date));
