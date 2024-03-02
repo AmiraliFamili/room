@@ -8,6 +8,14 @@ import androidx.room.RoomDatabase;
 
 import com.example.room.Models.Notes;
 
+/**
+ * @see RoomDB
+ *
+ *      - Class RoomDB acts as a database for the Notes activity with the help of an interface called
+ *      MainDataAccessObject, it initialises the database, it's name and instance.
+ *
+ * @author Amirali Famili
+ */
 @Database(entities = Notes.class, version = 1, exportSchema = false)
 public abstract class RoomDB extends RoomDatabase {
     private static RoomDB database;

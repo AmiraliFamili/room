@@ -41,7 +41,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/grey"
+                android:background="#B4242B2E"
                 android:padding="8dp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/nav_home" />
@@ -65,7 +65,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/grey"
+                android:background="#B4242B2E"
                 android:padding="8dp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/nav_about" />
@@ -89,7 +89,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/grey"
+                android:background="#B4242B2E"
                 android:padding="8dp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/nav_share" />

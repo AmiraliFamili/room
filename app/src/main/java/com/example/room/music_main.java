@@ -33,11 +33,20 @@ import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 
+/**
+ * @see music_main
+ *
+ *      - Class music_main is the main class for the music activity, it holds all the songs on one side and
+ *      all the albums on the other side in ther own fragment, it acts as the main page and an access point for all the classes in this project that have a
+ *      music_ at the beggining of their name.
+ *
+ * @author Amirali Famili
+ */
 public class music_main extends AppCompatActivity implements SearchView.OnQueryTextListener, NavigationView.OnNavigationItemSelectedListener {
 
     public static final int REQUEST_CODE = 1;
     static ArrayList<music_Files> musicFiles;
-    DrawerLayout drawerLayout;
+    private DrawerLayout drawerLayout;
 
     static boolean shuffleBool = false, repeatBool = false;
     static ArrayList<music_Files> albums = new ArrayList<>();
@@ -49,10 +58,9 @@ public class music_main extends AppCompatActivity implements SearchView.OnQueryT
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_song_player);
 
-
+        // set the drawer layout's navigation menu and sync it
         NavigationView navigationView = findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
-
         drawerLayout = findViewById(R.id.songs_drawer_layout);
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.song_toolbar);
         setSupportActionBar(toolbar);
@@ -62,12 +70,18 @@ public class music_main extends AppCompatActivity implements SearchView.OnQueryT
                 this, drawerLayout, toolbar, R.string.nav_open, R.string.nav_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+        // -------------------------------------------
 
         // Request permission on activity creation
         requestPermission();
         //loadMusicFiles(); this method loads all the music files in the device
     }
 
+    /**
+     *      - requestPermission is a method called in the onCreate method for this activity, is asking for user's
+     *      permission to have access to their files (that they have on their phone).
+     *      If the permission is granted then the music files are loaded
+     */
     private void requestPermission() {
         if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -78,7 +92,13 @@ public class music_main extends AppCompatActivity implements SearchView.OnQueryT
         }
     }
 
-    // Handle permission request result
+    /**
+     *      - onRequestPermissionsResult handling the response of the user to the permission question
+     *
+     * @param requestCode : should be 1 for all permissions
+     * @param permissions : permission type
+     * @param grantResults : should be 0 if the answer is yes
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -93,6 +113,9 @@ public class music_main extends AppCompatActivity implements SearchView.OnQueryT
         }
     }
 
+    /**
+     *      - loadMusicFiles loads all the music files into the app using the getAllAudio method by sending the instance of this class to it.
+     */
     private void loadMusicFiles() {
         // Load music files from storage
         musicFiles = getAllAudio(this);
@@ -101,6 +124,9 @@ public class music_main extends AppCompatActivity implements SearchView.OnQueryT
         initViewPager();
     }
 
+    /**
+     *      - initViewPager uses a helper class to load the music and album fragments
+     */
     private void initViewPager(){
         ViewPager viewPager = findViewById(R.id.viewPager);
         TabLayout tabLayout = findViewById(R.id.tableLayout);
@@ -111,32 +137,65 @@ public class music_main extends AppCompatActivity implements SearchView.OnQueryT
         tabLayout.setupWithViewPager(viewPager);
     }
 
+    /**
+     * @see ViewPagerAdapter
+     *
+     *      - Class ViewPagerAdapter is conserned with the only two fragments this activity has (album and song),
+     *      it adds, sets and sizes the fragments. (Fragment Maintainance)
+     *
+     * @author Amirali Famili
+     */
     private static class ViewPagerAdapter extends FragmentPagerAdapter {
 
         private ArrayList<Fragment> fragments;
         private ArrayList<String> titles;
 
+        /**
+         *      - ViewPagerAdapter constructor for this class, it assigns the fragments and titles,
+         */
         public ViewPagerAdapter(@NonNull FragmentManager fm){
             super(fm);
             this.fragments = new ArrayList<>();
             this.titles = new ArrayList<>();
         }
 
+        /**
+         *      - addFragments method adds new fragments and titles to the arrays specified above.
+         */
         void addFragments(Fragment fragment, String title){
             fragments.add(fragment);
             titles.add(title);
         }
+
+        /**
+         *      - getItem method takes a position (index) and returns the fragment on that position
+         *
+         * @param position : index of the chosen element
+         * @return Fragment element : it returns a fragment at the specified position
+         */
         @NonNull
         @Override
         public Fragment getItem(int position) {
             return fragments.get(position);
         }
 
+        /**
+         *      - getCount method is a getter method for the size of the fragment (total fragments).
+         *
+         * @return fragments array's size (total fragments)
+         */
         @Override
         public int getCount() {
             return fragments.size();
         }
 
+        /**
+         *      - getPageTitle method is a getter method for returning a char sequence of the title
+         *      at the position passed as the argument.
+         *
+         * @param position : index of the chosen title
+         * @return CharSequence title : it returns a title at the specified position from the main titles array.
+         */
         @Nullable
         @Override
         public CharSequence getPageTitle(int position) {
@@ -144,6 +203,12 @@ public class music_main extends AppCompatActivity implements SearchView.OnQueryT
         }
     }
 
+    /**
+     *      - getAllAudio method is a method used to gather all music files in the user's device into a single array list using their path, name , album and ...
+     *
+     * @param context : instance of this class
+     * @return all the music files found as a arraylist which has musicFiles Object as each element
+     */
     public ArrayList<music_Files> getAllAudio(Context context){
         SharedPreferences preferences = getSharedPreferences(SORT_THE_PREF, MODE_PRIVATE);
         String sortOrder = preferences.getString("sorting", "sortByName");
@@ -189,6 +254,12 @@ public class music_main extends AppCompatActivity implements SearchView.OnQueryT
         return tempAudioList;
     }
 
+    /**
+     *      - onCreateOptionsMenu method is used for assigning the popup menu responsible for deleting songs and searching for songs.
+     *
+     * @param menu : menu used for this page
+     * @return true or false
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.search_for_songs, menu);
@@ -199,11 +270,21 @@ public class music_main extends AppCompatActivity implements SearchView.OnQueryT
         return super.onCreateOptionsMenu(menu);
     }
 
+    /**
+     *          - Unimplemented method
+     */
     @Override
     public boolean onQueryTextSubmit(String query) {
         return false;
     }
 
+    /**
+     *      - onQueryTextChange method is used when searching for songs, each time user enters a new character,
+     *      this method is called to update the user's query
+     *
+     * @param newText : new text input from search bar
+     * @return true or false
+     */
     @Override
     public boolean onQueryTextChange(String newText) {
         String userInput = newText.toLowerCase();
@@ -217,6 +298,13 @@ public class music_main extends AppCompatActivity implements SearchView.OnQueryT
         return true;
     }
 
+    /**
+     *      - onOptionsItemSelected method is called when user decides to click on the menu on the top right corner to change the order that
+     *     the music files are displayed.
+     *
+     * @param item : selected item from menu
+     * @return true or false
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         SharedPreferences.Editor editor = getSharedPreferences(SORT_THE_PREF, MODE_PRIVATE).edit();

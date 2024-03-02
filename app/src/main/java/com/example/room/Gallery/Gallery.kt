@@ -22,11 +22,20 @@ import com.example.room.Notes
 import com.example.room.R
 import com.example.room.aboutUs
 import com.example.room.calculator
+import com.example.room.pass.helper
 import com.example.room.pass.passwordGN
 import com.example.room.rateUs
 import com.example.room.shareUs
 import com.google.android.material.navigation.NavigationView
 
+/**
+ * @see Gallery
+ *
+ *      - Class Gallery is the main class responsible for displaying all images inside a recycler view,
+ *      and handles permissions and file loading.
+ *
+ * @author Amirali Famili
+ */
 class Gallery : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private var imageRecycler: RecyclerView? = null
@@ -71,6 +80,9 @@ class Gallery : AppCompatActivity(), NavigationView.OnNavigationItemSelectedList
         }
     }
 
+    /**
+     *      - loadImages method loads all the images available in users device to the app.
+     */
     private fun loadImages() {
         progressBar?.visibility = View.VISIBLE
         allPictures = getAllImages()
@@ -78,6 +90,12 @@ class Gallery : AppCompatActivity(), NavigationView.OnNavigationItemSelectedList
         progressBar?.visibility = View.GONE
     }
 
+    /**
+     *      - getAllAudio method is a method used to gather all image files in the user's device into a single array list using their path and name
+     *
+     * @param context : instance of this class (an image)
+     * @return a list containing all images including their path and name
+     */
     private fun getAllImages(): ArrayList<Image>? {
         val images = ArrayList<Image>()
         val allImageUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
@@ -96,6 +114,13 @@ class Gallery : AppCompatActivity(), NavigationView.OnNavigationItemSelectedList
         return images
     }
 
+    /**
+     *      - onRequestPermissionsResult handling the response of the user to the permission question ...
+     *
+     * @param requestCode : should be 1 for all permissions
+     * @param permissions : permission type
+     * @param grantResults : should be 0 if the answer is yes
+     */
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,

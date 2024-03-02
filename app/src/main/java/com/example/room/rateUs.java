@@ -29,9 +29,9 @@ import com.google.android.material.navigation.NavigationView;
 
 public class rateUs extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    RatingBar ratingStar;
+    private RatingBar ratingStar;
 
-    DrawerLayout drawerLayout;
+    private DrawerLayout drawerLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

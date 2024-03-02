@@ -72,10 +72,10 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="@drawable/background_6"
-        app:headerLayout="@layout/nav_header"
-        app:itemIconTint="#9B2C2C"
-        app:itemTextColor="#D8A04A"
+        android:background="@drawable/background_7_op"
+        app:headerLayout="@layout/nav_header_6"
+        app:itemIconTint="#3F51B5"
+        app:itemTextColor="#5F97B0"
         app:menu="@menu/navigation_menu" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

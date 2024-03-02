@@ -1,6 +1,6 @@
 package com.example.room;
 
-        import static com.example.room.music_ApplicationClass.ACTION_NEXT;
+import static com.example.room.music_ApplicationClass.ACTION_NEXT;
         import static com.example.room.music_ApplicationClass.ACTION_PLAY;
         import static com.example.room.music_ApplicationClass.ACTION_PREVIOUS;
         import static com.example.room.music_ApplicationClass.CHANNEL_ID_1;
@@ -33,40 +33,66 @@ package com.example.room;
         import java.io.IOException;
         import java.util.ArrayList;
 
+/**
+ * @see MusicService
+ *
+ *      - Class MusicService is main class for the service that starts when user plays a song it's responsible for communications between the main activity
+ *      , communications like when user pauses the song through a notification, the music_main activity is called
+ *
+ * @author Amirali Famili
+ */
 public class MusicService extends Service implements MediaPlayer.OnCompletionListener {
 
 
-    IBinder binders = new binder();
-    MediaPlayer mediaPlayer;
-    ArrayList<music_Files> musicFiles = new ArrayList<>();
-    Uri uri;
-    int position = -1;
+    private IBinder binders = new binder();
+    private MediaPlayer mediaPlayer;
+    private ArrayList<music_Files> musicFiles = new ArrayList<>();
+    private Uri uri;
+    private int position = -1;
 
-    music_ActionPlaying actionPlaying;
-    MediaSessionCompat mediaSessionCompat;
+    private music_ActionPlaying actionPlaying;
+    private MediaSessionCompat mediaSessionCompat;
 
-    @Override
+    @Override // get the base context when the class is called
     public void onCreate() {
         super.onCreate();
         mediaSessionCompat = new MediaSessionCompat(getBaseContext(), "My Audio");
 
     }
 
+    /**
+     *      - onBind method returns a new binder object.
+     *
+     * @param intent
+     * return a new binder object
+     */
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        Log.e("Bind", "Method");
         return binders;
     }
 
-
-
-
+    /**
+     * @see binder
+     *
+     *      - Class binder returns an music service instance.
+     * @author Amirali Famili
+     */
     public class binder extends Binder {
         MusicService getService(){
             return MusicService.this;
         }
     }
+
+    /**
+     *      - onStartCommand method reacts to the commands from the notification.
+     *
+     * @param intent : intent sent for this class
+     * @param flags : flags value
+     * @param startId : startID for action
+     *
+     * @return START_STICKY : Constant to return from onStartCommand
+     */
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         int mPosition = intent.getIntExtra("servicePosition", -1);
@@ -99,6 +125,12 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
         return START_STICKY;
     }
 
+    /**
+     *      - playMedia method updates the music files list and starts the song at the index given
+     *      as an argument.
+     *
+     * @param position1 : intent sent for this class
+     */
     private void playMedia(int position1) {
         musicFiles = songList;
         position = position1;
@@ -115,38 +147,86 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
         }
     }
 
+    /**
+     *      - start method starts the mediaPlayer instance.
+     */
     void start(){
         mediaPlayer.start();
     }
+
+    /**
+     *      - isPlaying method checks if the song is currently being played.
+     *
+     * @return true if the song isPlaying and false if it's not.
+     */
     boolean isPlaying(){
         return mediaPlayer.isPlaying();
     }
 
+    /**
+     *      - stop method stops the mediaPlayer instance.
+     */
     void stop(){
         mediaPlayer.stop();
     }
+
+    /**
+     *      - release method releases the mediaPlayer instance.
+     */
     void release(){
         mediaPlayer.release();
     }
-    int getDuration () {
+
+    /**
+     *      - getDuration method is a getter method for obtaining the total duration of the song selected.
+     *
+     * @return total duration of the selected song
+     */
+    int getDuration() {
         return mediaPlayer.getDuration();
     }
+
+    /**
+     *      - seekTo method changes the seekbar and thus changes the part of the song being played,
+     *      according to the position inside the seekbar, this position is given as an argument and the method simply makes
+     *      the song to jump forward or backward depending on the position.
+     *
+     *
+     * @param position : the position that the song should jump to.
+     */
     void seekTo(int position){
         mediaPlayer.seekTo(position);
     }
 
+    /**
+     *      - getCurrentPosition method is a getter method for obtaining the current position of the song inside the seekbar.
+     *
+     * @return the position of the song in the seekbar
+     */
     int getCurrentPosition(){
         return mediaPlayer.getCurrentPosition();
     }
 
+
+    /**
+     *      - createMediaPlayer method is used for creating a new media player.
+     */
     void createMediaPlayer(int positionInner){
         position = positionInner;
         uri = Uri.parse(musicFiles.get(position).getPath());
         mediaPlayer = MediaPlayer.create(getBaseContext(), uri);
     }
+
+    /**
+     *      - pause method pauses the song.
+     */
     void pause(){
         mediaPlayer.pause();
     }
+
+    /**
+     *      - onCompleted method listens for when the song is completed, then plays the next song.
+     */
     void onCompleted(){
         mediaPlayer.setOnCompletionListener(this);
     }
@@ -163,10 +243,23 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
 
     }
 
+    /**
+     *      - setCallBack method is a setter method for action Playing .
+     *
+     * @param actionPlaying : music_ActionPlaying instance
+     */
     void setCallBack(music_ActionPlaying actionPlaying) {
         this.actionPlaying = actionPlaying;
     }
 
+    /**
+     *      - getAlbumart method is responsible for extracting the cover of music files.
+     *
+     * @param uri : the path for the music file
+     *
+     *
+     * @return art : the cover for the song that has the path "uri"
+     */
     private byte[] getAlbumart(String uri) throws IOException {
         MediaMetadataRetriever retriever = new MediaMetadataRetriever();
         retriever.setDataSource(uri);
@@ -175,21 +268,13 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
         return art;
     }
 
-    public boolean isSongPlaying() {
-        return mediaPlayer != null && mediaPlayer.isPlaying();
-    }
-
+    /**
+     *      - showNotification method is a single method responsible for the notification created for when user,
+     *      clicks on a song, the notification should show at the top of the screen
+     *
+     * @param playPauseButton : the id of the current play and pause method (is it play or pause ?)
+     */
     void showNotification(int playPauseButton) {
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            NotificationChannel channel1 = new NotificationChannel(CHANNEL_ID_1, "Channel(1)", NotificationManager.IMPORTANCE_HIGH);
-            channel1.setDescription("Channel 1 Description ... ");
-            NotificationChannel channel2 = new NotificationChannel(CHANNEL_ID_2, "Channel(2)", NotificationManager.IMPORTANCE_HIGH);
-            channel1.setDescription("Channel 2 Description ... ");
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel1);
-            notificationManager.createNotificationChannel(channel2);
-        }
 
         Intent intent = new Intent(this, music_PlayingSongs.class);
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, 0);

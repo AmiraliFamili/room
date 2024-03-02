@@ -24,17 +24,37 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+
+/**
+ * @see music_Adapter
+ *
+ *      - Class music_Adapter is an Adapter class used for simple operations on music files, like getting their position in the list or removing them from the uset's device.
+ *
+ * @author Amirali Famili
+ */
 public class music_Adapter extends RecyclerView.Adapter<music_Adapter.VideoHolder> {
 
     private Context context;
     static ArrayList<music_Files> music;
 
 
+    /**
+     * @see music_AlbumAdapter
+     *
+     *      - music_AlbumAdapter Constructor just for assigning values when an intent is made to this class.
+     *
+     * @param musicContext : the context of the music files
+     * @param musicFiles : all the music files
+     */
     music_Adapter(Context musicContext, ArrayList<music_Files> musicFiles) {
         this.music = musicFiles;
         this.context = musicContext;
     }
 
+    /**
+     *
+     *      - Initialise a new view to View Holder class
+     */
     @NonNull
     @Override
     public VideoHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -42,6 +62,16 @@ public class music_Adapter extends RecyclerView.Adapter<music_Adapter.VideoHolde
         return new VideoHolder(view);
     }
 
+    /**
+     *
+     *      - onBindViewHolder method is a method which determines what is happening inside the recycler view.
+     *      It's an mandatory method when extending the recycler view class.
+     *
+     *
+     * @param holder : information about the album
+     * @param position : the position of the music file inside the main array
+     *
+     */
     @Override
     public void onBindViewHolder(@NonNull VideoHolder holder, int position) {
         holder.fileName.setText(music.get(position).getTitle());
@@ -56,7 +86,7 @@ public class music_Adapter extends RecyclerView.Adapter<music_Adapter.VideoHolde
             Glide.with(context).load(R.drawable.music).into(holder.albumImage);
         }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
+            @Override // when user clicks the item holder
             public void onClick(View v) {
                 Intent intent = new Intent(context, music_PlayingSongs.class);
                 intent.putExtra("position", position);
@@ -65,7 +95,7 @@ public class music_Adapter extends RecyclerView.Adapter<music_Adapter.VideoHolde
         });
 
         holder.menuMore.setOnClickListener(new View.OnClickListener() {
-            @Override
+            @Override// when user clicks on the holder for menu
             public void onClick(final View v) {
                 PopupMenu popupMenu = new PopupMenu(context, v);
                 popupMenu.getMenuInflater().inflate(R.menu.individual_songs_menu, popupMenu.getMenu());
@@ -82,6 +112,12 @@ public class music_Adapter extends RecyclerView.Adapter<music_Adapter.VideoHolde
 
     }
 
+    /**
+     *      - deleteFile method is a private helper method which removes the music file from the app with a position given as input.
+     *
+     * @param position : an integer that determines the music file's location inside the main files list
+     * @param v : the View for the song
+     */
     private void deleteFile(int position, View v) {
         Uri contentUri = ContentUris.withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, Long.parseLong(music.get(position).getId()));
         File file = new File(music.get(position).getPath());
@@ -101,11 +137,24 @@ public class music_Adapter extends RecyclerView.Adapter<music_Adapter.VideoHolde
         }
     }
 
+    /**
+     *      - getItemCount method is returning the size of the list containing all songs
+     *
+     *
+     * @return total number of songs in the app
+     */
     @Override
     public int getItemCount() {
         return music.size();
     }
 
+    /**
+     * @see VideoHolder
+     *
+     *      - Class VideoHolder is a helper class which assigns the music's image, menu and name and makes them available for the main class to use.
+     *
+     * @author Amirali Famili
+     */
     public class VideoHolder extends RecyclerView.ViewHolder {
 
         TextView fileName;
@@ -119,6 +168,14 @@ public class music_Adapter extends RecyclerView.Adapter<music_Adapter.VideoHolde
         }
     }
 
+    /**
+     *      - getAlbumart method is responsible for extracting the cover of music files.
+     *
+     * @param uri : the path for the music file
+     *
+     *
+     * @return art : the cover for the song that has the path "uri"
+     */
     private byte[] getAlbumart(String uri) throws IOException {
         MediaMetadataRetriever retriever = new MediaMetadataRetriever();
         retriever.setDataSource(uri);
@@ -126,6 +183,11 @@ public class music_Adapter extends RecyclerView.Adapter<music_Adapter.VideoHolde
         retriever.release();
         return art;
     }
+    /**
+     *      - updateList method is updating the music arrayList simply by assigning a new one given as a parameter.
+     *
+     * @param musicFiles : all the songs in the app
+     */
     void updateList(ArrayList<music_Files> musicFiles){
         music = new ArrayList<>();
         music.addAll(musicFiles);

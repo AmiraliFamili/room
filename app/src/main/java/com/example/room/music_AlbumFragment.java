@@ -13,14 +13,37 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
+/**
+ * @see music_AlbumFragment
+ *
+ *      - Class music_AlbumFragment is main class that provides the backend simple operations on album fragment inside the music_main.
+ *
+ * @author Amirali Famili
+ */
 public class music_AlbumFragment extends Fragment {
 
-    RecyclerView recyclerView;
+    private RecyclerView recyclerView;
 
-    music_AlbumAdapter musicAlbumAdapter;
+    private music_AlbumAdapter musicAlbumAdapter;
+
+    /**
+     * @see music_AlbumFragment
+     *
+     *      - music_AlbumFragment default Constructor for ease of access.
+     *
+     */
     public music_AlbumFragment(){
 
     }
+
+    /**
+     *      - onCreateView the main method which is called when the fragment is shown.
+     *
+     *
+     * @param inflater : inflater is for setting the correct layout
+     * @param container : the container that is holding the fragment
+     * @param savedInstanceState : for saving the state of the fragment
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

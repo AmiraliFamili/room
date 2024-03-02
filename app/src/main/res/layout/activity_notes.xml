@@ -71,7 +71,7 @@
         android:id="@+id/notes_nav_view"
         android:layout_gravity="start"
         android:background="@drawable/background_2_op"
-        app:headerLayout="@layout/nav_header"
+        app:headerLayout="@layout/nav_header_2"
         app:menu="@menu/navigation_menu"
         app:itemIconTint="#A9401D"
         app:itemTextColor="#1F5268"/>

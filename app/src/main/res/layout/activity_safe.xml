@@ -154,7 +154,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="start"
             android:background="@drawable/background_4_op"
-            app:headerLayout="@layout/nav_header"
+            app:headerLayout="@layout/nav_header_8"
             app:menu="@menu/navigation_menu"
             app:itemIconTint="@color/niceRed"
             app:itemTextColor="@color/Note1"/>

@@ -42,23 +42,22 @@ import java.util.List;
  * @package Adapters, with classes : NotesListAdapter, NotesViewHolder
  * @package room , which is the main package that the project is implemented in
  *
- *
  * @Extra This class uses the packages above to communicate with the Room database and operate different operations on notes and their containers, like changing their color to a random value.
  *
  * @author Amirali Famili
  */
 public class Notes extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener, NavigationView.OnNavigationItemSelectedListener {
 
-    RecyclerView recyclerView;
-    NotesListAdapter notesListAdapter;
-    List<com.example.room.Models.Notes> notes = new ArrayList<>();
-    RoomDB database;
-    FloatingActionButton addNewNote;
-    SearchView searchNotes;
-    com.example.room.Models.Notes pinned;
+    private RecyclerView recyclerView;
+    private NotesListAdapter notesListAdapter;
+    private List<com.example.room.Models.Notes> notes = new ArrayList<>();
+    private RoomDB database;
+    private FloatingActionButton addNewNote;
+    private SearchView searchNotes;
+    private com.example.room.Models.Notes pinned;
 
     private DrawerLayout drawerLayout;
-    @Override
+    @Override // this class is called
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notes);
@@ -77,7 +76,7 @@ public class Notes extends AppCompatActivity implements PopupMenu.OnMenuItemClic
         updateRecycler(notes);
 
         addNewNote.setOnClickListener(new View.OnClickListener() {
-            @Override
+            @Override // when a new note is required by user
             public void onClick(View v) {
                 Intent intent = new Intent(Notes.this, NotesTaker.class);
                 startActivityForResult(intent, 200);
@@ -85,11 +84,17 @@ public class Notes extends AppCompatActivity implements PopupMenu.OnMenuItemClic
         });
 
         searchNotes.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
+            @Override // Unimplemented method
             public boolean onQueryTextSubmit(String query) {
                 return false;
             }
 
+
+            /**
+             *      - onQueryTextChange method is called when user is trying to change the search bar.
+             *
+             * @param newText : the new text entered at the search bar
+             */
             @Override
             public boolean onQueryTextChange(String newText) {
                 filter(newText);
@@ -111,10 +116,8 @@ public class Notes extends AppCompatActivity implements PopupMenu.OnMenuItemClic
 
 
     /**
-     *
      *      - filter method is called everytime user enters a character in the search bar within the Notes Activity,
      *      and finds the relevant search result in both note's title and body.
-     *
      */
     private void filter(String newText){
         List<com.example.room.Models.Notes> filtered = new ArrayList<>();
@@ -171,6 +174,10 @@ public class Notes extends AppCompatActivity implements PopupMenu.OnMenuItemClic
         recyclerView.setAdapter(notesListAdapter);
     }
 
+    /**
+     *      - notesListener is an anonymous class responsible for pining a note on hold and letting the note taker class know
+     *      that their dealing with an old note.
+     */
     private final NotesListener notesListener = new NotesListener() {
         @Override
         public void onClick(com.example.room.Models.Notes notes) {
@@ -188,7 +195,9 @@ public class Notes extends AppCompatActivity implements PopupMenu.OnMenuItemClic
     };
 
     /**
-     *      - show a popup menu for delete and pin operations
+     *      - showPopUpDialog method shows a popup menu for delete and pin operations
+     *
+     * @param cardView : view for the menu
      */
     private void showPopUpDialog(CardView cardView) {
         PopupMenu popup = new PopupMenu(this, cardView);
@@ -199,7 +208,9 @@ public class Notes extends AppCompatActivity implements PopupMenu.OnMenuItemClic
 
 
     /**
-     *      - when user clicks on an item on pop up menu
+     *      - onMenuItemClick method is called when user clicks on an item on pop up menu
+     *
+     * @param item : a menu item
      */
     @Override
     public boolean onMenuItemClick(MenuItem item) {
@@ -226,12 +237,23 @@ public class Notes extends AppCompatActivity implements PopupMenu.OnMenuItemClic
         return false;
     }
 
+    /**
+     *      - onCreateOptionsMenu method is called when the activity is started and creates the
+     *      menu view.
+     *
+     * @param menu : navigation menu
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) { // create menu
         getMenuInflater().inflate(R.menu.navigation_menu, menu);
         return true;
     }
 
+    /**
+     *      - onOptionsItemSelected method is called when an item is selected from the menu.
+     *
+     * @param item : menu item
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);

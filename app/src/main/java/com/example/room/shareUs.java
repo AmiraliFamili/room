@@ -30,11 +30,11 @@ import com.google.android.material.navigation.NavigationView;
  */
 public class shareUs extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
-    VideoView video;
-    MediaController media;
-    boolean isVideoPaused = false;
+    private VideoView video;
+    private MediaController media;
+    private boolean isVideoPaused = false;
 
-    DrawerLayout drawerLayout;
+    private DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +93,7 @@ public class shareUs extends AppCompatActivity implements NavigationView.OnNavig
     }
 
     @Override
-    protected void onResume() {
+    protected void onResume() { // onResume method for this activity, used for start and stopping the video
         super.onResume();
         if (isVideoPaused) {
             video.start();

@@ -41,6 +41,15 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
 
+
+/**
+ * @see music_PlayingSongs
+ *
+ *      - Class music_PlayingSongs is the activity called when user clicks on a song to be played, it handls all the
+ *      actions made by user on songs, like playing them, skipping them and so on ...
+ *
+ * @author Amirali Famili
+ */
 public class music_PlayingSongs extends AppCompatActivity implements music_ActionPlaying, ServiceConnection {
 
 
@@ -72,7 +81,7 @@ public class music_PlayingSongs extends AppCompatActivity implements music_Actio
         initialise();
         getIntentMethods();
         seekBarSongs.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
+            @Override  // when the seekbar's progress is changed this method is called
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 if (musicService != null && fromUser){
                     musicService.seekTo(progress * 1000);
@@ -84,18 +93,19 @@ public class music_PlayingSongs extends AppCompatActivity implements music_Actio
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
+                // Unimplemented method
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
+                // Unimplemented method
             }
         });
-        updateSeekBar();
+        updateSeekBar(); // update seekbar to show the correct remaining time
 
 
         back_button.setOnClickListener(new View.OnClickListener() {
-            @Override
+            @Override // simple back button, redirects users to the previous page
             public void onClick(View v) {
                 Intent intent = new Intent(music_PlayingSongs.this, music_main.class);
                 startActivity(intent);
@@ -104,6 +114,10 @@ public class music_PlayingSongs extends AppCompatActivity implements music_Actio
 
     }
 
+    /**
+     *      - updateSeekBar method is used for updating the seekbar by calculating the remaining time from when
+     *      the user started the song and updating the seekbar text values correspondingly.
+     */
     private void updateSeekBar() {
         handler.postDelayed(new Runnable() {
             @Override
@@ -143,11 +157,17 @@ public class music_PlayingSongs extends AppCompatActivity implements music_Actio
         });
     }
 
+    /**
+     *      - fullScreen method is called for making the page to appear as a full screen page.
+     */
     private void fullScreen(){
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
+    /**
+     *      - onResume method for this activity, binding the service and starting the play, next and previous threads.
+     */
     @Override
     protected void onResume() {
         Intent intent = new Intent(this, MusicService.class);
@@ -158,12 +178,18 @@ public class music_PlayingSongs extends AppCompatActivity implements music_Actio
         super.onResume();
     }
 
+    /**
+     *      - onPause method for this activity, un binding the service.
+     */
     @Override
     protected void onPause() {
         super.onPause();
         unbindService(this);
     }
 
+    /**
+     *      - playThread method listens for clicks on the play and pause button and acts accordingly.
+     */
     private void playThread(){
         playThread = new Thread(){
             @Override
@@ -181,6 +207,10 @@ public class music_PlayingSongs extends AppCompatActivity implements music_Actio
     }
 
 
+    /**
+     *      - playAndPauseClicked method is called when user clicks on the play and pause button, this method is
+     *      updating both the notification's play and pause button and the layout's play and pause button.
+     */
     public void playAndPauseClicked(){
         if (musicService.isPlaying()){
             playAndPause.setImageResource(R.drawable.song_play_arrow);
@@ -217,6 +247,10 @@ public class music_PlayingSongs extends AppCompatActivity implements music_Actio
             }, 1000); // Start after 1 second
         }
     }
+
+    /**
+     *      - nextThread method listens for clicks on the next song button and acts accordingly.
+     */
     private  void  nextThread(){
         nextThread = new Thread(){
             @Override
@@ -233,6 +267,10 @@ public class music_PlayingSongs extends AppCompatActivity implements music_Actio
         nextThread.start();
     }
 
+    /**
+     *      - nextSongClicked method is called when user clicks on the next song button, this method is
+     *      updating both the notification's next song button and the layout's next song button.
+     */
     public void nextSongClicked(){
         if (musicService.isPlaying()){
             musicService.stop();
@@ -301,6 +339,9 @@ public class music_PlayingSongs extends AppCompatActivity implements music_Actio
         return  random.nextInt(i + 1);
     }
 
+    /**
+     *      - prevThread method listens for clicks on the previous song button and acts accordingly.
+     */
     private void prevThread(){
         prevThread = new Thread(){
             @Override
@@ -317,6 +358,10 @@ public class music_PlayingSongs extends AppCompatActivity implements music_Actio
         prevThread.start();
     }
 
+    /**
+     *      - previousSongClicked method is called when user clicks on the previous song button, this method is
+     *      updating both the notification's previous song button and the layout's previous song button.
+     */
     public void  previousSongClicked(){
         if (musicService.isPlaying()){
             musicService.stop();
@@ -380,6 +425,14 @@ public class music_PlayingSongs extends AppCompatActivity implements music_Actio
         }
     }
 
+
+    /**
+     *      - formattedTime method is used for reformatting the time and returning the correct format
+     *      by extracting the minutes and seconds of the total duration and setting the string for seekbar.
+     *
+     * @param mCurrentPosition : total duration of a song
+     * @return standard total duration with minutes and seconds
+     */
     private String formattedTime(int mCurrentPosition){
         String totalOut = "";
         String totalNew = "";
@@ -395,6 +448,10 @@ public class music_PlayingSongs extends AppCompatActivity implements music_Actio
         }
     }
 
+    /**
+     *      - getIntentMethods method is used for receiving the extra text from the intents sent for this activity and
+     *      act accordingly in response to them.
+     */
     private void getIntentMethods(){
         position = getIntent().getIntExtra("position", -1);
         String sender = getIntent().getStringExtra("sender");
@@ -420,9 +477,9 @@ public class music_PlayingSongs extends AppCompatActivity implements music_Actio
 
     }
 
-
-
-
+    /**
+     *      - initialise method initialises all the elements inside this activity
+     */
     private void initialise(){
         SongName = findViewById(R.id.SongName);
         nowPlaying = findViewById(R.id.nowPlaying);
@@ -439,6 +496,12 @@ public class music_PlayingSongs extends AppCompatActivity implements music_Actio
         seekBarSongs = findViewById(R.id.seekBarSongs);
     }
 
+
+    /**
+     *      - metaData method uses the music file's meta data to set it's cover image, title and so on .. .
+     *
+     * @param uri : path of the music file
+     */
     private void metaData(Uri uri){
         MediaMetadataRetriever retriever = new MediaMetadataRetriever();
         retriever.setDataSource(uri.toString());
@@ -490,13 +553,21 @@ public class music_PlayingSongs extends AppCompatActivity implements music_Actio
         }
     }
 
+
+    /**
+     *      - metaData method set's the music's cover as well as a small fade-in, fade-out animation when the song is skipped.
+     *
+     * @param context : Context instance of this class
+     * @param imageView : temporary image for music files
+     * @param bitmap : actual cover of the song
+     */
     public void ImageAnimation(Context context, ImageView imageView, Bitmap bitmap){
         Animation animOut = AnimationUtils.loadAnimation(context, android.R.anim.fade_out);
         Animation animIn = AnimationUtils.loadAnimation(context, android.R.anim.fade_in);
         animOut.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
-
+                    // Unimplemented method
             }
 
             @Override
@@ -505,17 +576,17 @@ public class music_PlayingSongs extends AppCompatActivity implements music_Actio
                 animIn.setAnimationListener(new Animation.AnimationListener() {
                     @Override
                     public void onAnimationStart(Animation animation) {
-
+                        // Unimplemented method
                     }
 
                     @Override
                     public void onAnimationEnd(Animation animation) {
-
+                        // Unimplemented method
                     }
 
                     @Override
                     public void onAnimationRepeat(Animation animation) {
-
+                        // Unimplemented method
                     }
                 });
                 imageView.startAnimation(animIn);
@@ -523,13 +594,19 @@ public class music_PlayingSongs extends AppCompatActivity implements music_Actio
 
             @Override
             public void onAnimationRepeat(Animation animation) {
-
+                // Unimplemented method
             }
         });
         imageView.startAnimation(animOut);
     }
 
-
+    /**
+     *      - onServiceConnected method is called when user clicks on a song, it starts the service as well as
+     *      starting a notification channel for ease of the user.
+     *
+     * @param name : name of the communication channel
+     * @param service : music service that plays songs in the background
+     */
     @Override
     public void onServiceConnected(ComponentName name, IBinder service) {
         MusicService.binder mbinder = (MusicService.binder) service;
@@ -547,6 +624,12 @@ public class music_PlayingSongs extends AppCompatActivity implements music_Actio
         }
     }
 
+
+    /**
+     *      - onServiceDisconnected method stops the service when the service is disconnected by assigning it to a null value.
+     *
+     * @param name : name of the communication channel
+     */
     @Override
     public void onServiceDisconnected(ComponentName name) {
         musicService = null;

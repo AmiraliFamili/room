@@ -26,10 +26,10 @@ import java.util.Date;
  */
 public class NotesTaker extends AppCompatActivity {
 
-    EditText textEditor_title, textEditor_notes;
-    ImageView note_image_view;
-    Notes notes;
-    boolean oldNote = false;
+    private EditText textEditor_title, textEditor_notes;
+    private ImageView note_image_view;
+    private Notes notes;
+    private boolean oldNote = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

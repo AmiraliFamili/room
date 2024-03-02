@@ -27,9 +27,9 @@ import com.google.android.material.navigation.NavigationView;
  */
 public class calculator extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
-    TextView b1, b2, b3, b4, b5, b6, b7, b8, b9, b0, bdot, bpi, bequal, bplus, bmin, bmul, bdiv, binv, bsquare, bfact, bln, blog,bsqrt, btan, bcos, bsin, bb1, bb2, bc, bac, tvsec, tvmain;
-    final String pi = "3.141592653589793238462643383279502884197";
-    DrawerLayout drawerLayout;
+    private TextView b1, b2, b3, b4, b5, b6, b7, b8, b9, b0, bdot, bpi, bequal, bplus, bmin, bmul, bdiv, binv, bsquare, bfact, bln, blog,bsqrt, btan, bcos, bsin, bb1, bb2, bc, bac, tvsec, tvmain;
+    private final String pi = "3.141592653589793238462643383279502884197";
+    private DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -270,12 +270,9 @@ public class calculator extends AppCompatActivity implements NavigationView.OnNa
     }
 
     /**
-     *
      *      - This method is calculates the factorial of a given integer as input.
      *
-     *
      * @param n : an integer
-     *
      *
      * @return n!
      */
@@ -292,13 +289,10 @@ public class calculator extends AppCompatActivity implements NavigationView.OnNa
 
 
     /**
-     *
      *      - Since when the user clicks on a function on calculator like log, the text "log" will be added the to string
      *      This method will parse that string and extract the meaningful symbols form the text and produce results from them.
      *
-     *
      * @param  str : input from the calculator
-     *
      *
      * @return val : the returned value is a double which is the answer to the math problem
      */
@@ -306,10 +300,16 @@ public class calculator extends AppCompatActivity implements NavigationView.OnNa
         return new Object(){
             int pos = -1, ch;
 
+            /**
+             *      - nextChar extracts the next character in the main string which is our math problem.
+             */
             void nextChar(){
                 ch = (++pos < str.length()) ? str.charAt(pos) : -1;
             }
 
+            /**
+             *      - eat method determines if the character is a standard one
+             */
             boolean eat (int charToEat){
                 while (ch == ' ') nextChar();
                 if (ch == charToEat){
@@ -319,6 +319,11 @@ public class calculator extends AppCompatActivity implements NavigationView.OnNa
                 return false;
             }
 
+            /**
+             *      - parse method parses the character and return the numerical value
+             *
+             * @return the number inside the chartacter
+             */
             double parse(){
                 nextChar();
                 double x = parseExpression();
@@ -327,6 +332,11 @@ public class calculator extends AppCompatActivity implements NavigationView.OnNa
                 }return x;
             }
 
+            /**
+             *      - parseExpression method parses expressions in math problem and returns the answer.
+             *
+             * @return numerical value for the result
+             */
             double parseExpression(){
                 double x = parseTerm();
                 for (;;){
@@ -336,6 +346,11 @@ public class calculator extends AppCompatActivity implements NavigationView.OnNa
                 }
             }
 
+            /**
+             *      - parseTerm method parses a term and returns the answer.
+             *
+             * @return numerical value for the result
+             */
             double parseTerm(){
                 double x = parseFactor();
                 for (;;){
@@ -345,6 +360,11 @@ public class calculator extends AppCompatActivity implements NavigationView.OnNa
                 }
             }
 
+            /**
+             *      - parseFactor method parses a factor and returns the answer.
+             *
+             * @return numerical value for the result
+             */
             double parseFactor(){
                 if (eat('+')){ return parseFactor();}
                 else if (eat('-')) {return -parseFactor();}
@@ -377,7 +397,6 @@ public class calculator extends AppCompatActivity implements NavigationView.OnNa
     }
 
     /**
-     *
      *      - Initialise all elements.
      */
     private void initialise(){

@@ -50,11 +50,11 @@
         android:layout_height="match_parent"
         android:id="@+id/notes_nav_view"
         android:layout_gravity="start"
-        android:background="@drawable/background_2_op"
+        android:background="@drawable/background_7_op"
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/navigation_menu"
-        app:itemIconTint="#A9401D"
-        app:itemTextColor="#1F5268"/>
+        app:itemIconTint="#FFC107"
+        app:itemTextColor="#1A1A1A"/>
 
 
 

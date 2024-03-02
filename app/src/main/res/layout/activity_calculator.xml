@@ -626,9 +626,9 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="@drawable/calback"
-        app:headerLayout="@layout/nav_header"
-        app:itemIconTint="@color/grey_dark"
-        app:itemTextColor="@color/niceBlue_dark"
+        app:headerLayout="@layout/nav_header_7"
+        app:itemIconTint="#6B1834"
+        app:itemTextColor="#A06206"
         app:menu="@menu/navigation_menu" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

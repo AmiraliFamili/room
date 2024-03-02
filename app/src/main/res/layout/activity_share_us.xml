@@ -43,11 +43,11 @@
         android:layout_height="match_parent"
         android:id="@+id/notes_nav_view"
         android:layout_gravity="start"
-        android:background="@drawable/background_2_op"
-        app:headerLayout="@layout/nav_header"
+        android:background="@drawable/background_8_op"
+        app:headerLayout="@layout/nav_header_6"
         app:menu="@menu/navigation_menu"
-        app:itemIconTint="#A9401D"
-        app:itemTextColor="#1F5268"/>
+        app:itemIconTint="#A27E13"
+        app:itemTextColor="#1C5872"/>
 
 
 

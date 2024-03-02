@@ -25,8 +25,8 @@ import android.widget.VideoView;
  */
 public class dashboardVideo extends AppCompatActivity {
 
-    CardView homeDash, aboutDash, shareDash;
-    VideoView video;
+    private CardView homeDash, aboutDash, shareDash;
+    private VideoView video;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +50,10 @@ public class dashboardVideo extends AppCompatActivity {
         });
     }
 
-    private void setListeners() { // initialise the cards and set listeners
+    /**
+     *      - setListeners method initialises the cards and set listeners for them
+     */
+    private void setListeners() {
         homeDash = findViewById(R.id.homeDash);
         aboutDash = findViewById(R.id.aboutDash);
         shareDash = findViewById(R.id.shareDash);
@@ -80,18 +83,28 @@ public class dashboardVideo extends AppCompatActivity {
 
     }
 
+    /**
+     *      - onPause method pauses the video
+     */
     @Override
     protected void onPause() {
         super.onPause();
         video.pause();
     }
 
+
+    /**
+     *      - onResume method starts the video
+     */
     @Override
     protected void onResume() {
         super.onResume();
         video.start();
     }
 
+    /**
+     *      - onDestroy method stops the video
+     */
     @Override
     protected void onDestroy() {
         super.onDestroy();

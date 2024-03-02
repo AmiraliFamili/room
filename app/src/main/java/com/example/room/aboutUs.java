@@ -48,7 +48,7 @@ public class aboutUs extends AppCompatActivity {
 
         View aboutPage = new AboutPage(this)
                 .isRTL(false)
-                .setImage(R.drawable.icon)
+                .setImage(R.drawable.nav_head_4)
                 .setDescription("Learn About Us")
                 .addEmail("a.famili81@gmail.com")
                 .addWebsite("https://room.example.com/")
@@ -68,6 +68,7 @@ public class aboutUs extends AppCompatActivity {
      *      - This method will take an integer as input and sets the theme of the about us page,
      *      0 is white (day mode) and 1 is black (dark theme)
      *
+     * @param setting : an integer for determining the theme of the page
      */
     private void simulateDayNight(int setting) {
 
@@ -88,8 +89,9 @@ public class aboutUs extends AppCompatActivity {
     /**
      *      - This method is responsible for customizing the Rights part of the about us page.
      *
+     * @return a customised copy rights element to be used in the about us page
      */
-    Element getCopyRightsElement() {
+    private Element getCopyRightsElement() {
         Element copyRightsElement = new Element();
         @SuppressLint({"StringFormatInvalid", "LocalSuppress"}) final String copyrights = String.format(getString(R.string.copy_write), Calendar.getInstance().get(Calendar.YEAR));
         copyRightsElement.setTitle(copyrights);

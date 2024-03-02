@@ -13,6 +13,14 @@ import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.example.room.R
 
+/**
+ * @see ImageFullActivity
+ *
+ *      - Class ImageFullActivity is responsible for displaying the selected image
+ *      in a new full screen window.
+ *
+ * @author Amirali Famili
+ */
 class ImageFullActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +49,7 @@ class ImageFullActivity : AppCompatActivity() {
                 }
 
                 override fun onLoadCleared(placeholder: Drawable?) {
-                    // TODO :: ....
+                    // Unimplemented method
                 }
             })
     }

@@ -64,8 +64,8 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="@drawable/background_5_op"
-        app:headerLayout="@layout/nav_header"
-        app:itemIconTint="@color/olive_dark"
+        app:headerLayout="@layout/nav_header_3"
+        app:itemIconTint="#467412"
         app:itemTextColor="@color/nicePurple"
         app:menu="@menu/navigation_menu" />
 

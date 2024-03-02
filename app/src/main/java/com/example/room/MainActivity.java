@@ -26,15 +26,14 @@ import com.example.room.pass.passwordGN;
 public class MainActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE_HOME = 1;
-    MediaController media;
-    VideoView video;
-    VideoView dashboardVideo;
+    private MediaController media;
+    private VideoView video, dashboardVideo;
 
-    LinearLayout dashboardLayout;
+    private LinearLayout dashboardLayout;
 
-    boolean startingVideoPlayed = false;
+    private boolean startingVideoPlayed = false;
 
-    boolean dashboardVideoPlaying = false;
+    private boolean dashboardVideoPlaying = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -161,6 +160,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     *      - onActivityResult checks the request code and result code and sets a boolean which
+     *      determines if the video should be played or not to true
+     *
+     * @param requestCode : request code , should be 1
+     * @param resultCode : result code , should be -1
+     * @param data : data from intent
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -170,6 +177,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     *      - onPause : pause both videos
+     */
     @Override
     protected void onPause() {
         super.onPause();
@@ -181,6 +191,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     *      - onResume : start dashboard videos
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -189,7 +202,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void showDashboard() { // setting all the elements in main activity to visible after the video is played
+    /**
+     *      - showDashboard method is setting all the elements in main activity to visible after the initial video is played
+     */
+    private void showDashboard() {
         dashboardLayout.setVisibility(View.VISIBLE);
         dashboardVideo.setVisibility(View.VISIBLE);
     }
